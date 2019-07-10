@@ -40,7 +40,6 @@ class App extends Component {
     ) 
       .then(res => res.json())
       .then(json => json.data.movies)
-      .then(json => console.log(json))
       .catch(err => console.log(err));
   };
 

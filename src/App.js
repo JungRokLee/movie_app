@@ -8,7 +8,7 @@ class App extends Component {
 
   state = {};
 
-  componentDidMount() {
+  componentDidMount() { // render가 완료된 후에 _getMovies()를 호출하여 Api를 받아온다
     this._getMovies();
   }
 
@@ -27,19 +27,20 @@ class App extends Component {
     return movies;
   };
 
-  _getMovies = async () => {
-    const movies = await this._callApi();
+  _getMovies = async () => {  // 비동기로 await하여 _callApi()호출
+    const movies = await this._callApi(); //_callApi() 하여 받아온 json을 movies에 저장
     this.setState({
-      movies
+      movies //movies: movies
     });
   };
 
   _callApi = () => {
-    return fetch(
+    return fetch(  //promise -> then -> catch
       "https://yts.lt/api/v2/list_movies.json?sort_by=download_count"
-    )
-      .then(potato => potato.json())
+    ) 
+      .then(res => res.json())
       .then(json => json.data.movies)
+      .then(json => console.log(json))
       .catch(err => console.log(err));
   };
 
